@@ -5,14 +5,19 @@ import "@thirdweb-dev/contracts/base/ERC20Base.sol";
 
 contract StatstradeClassA is ERC20Base {
       constructor(
-        address _defaultAdmin,
         string memory _name,
         string memory _symbol
     )
         ERC20Base(
-            _defaultAdmin,
+            msg.sender,
             _name,
             _symbol
         )
-    {}
+    {
+        _mint(payable(msg.sender), 100000000);
+    }
+    
+    function decimals() public view override returns (uint8) {
+        return 0;
+    }
 }
